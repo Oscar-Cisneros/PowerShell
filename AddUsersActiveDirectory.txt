@@ -1,0 +1,20 @@
+$path='C:\Project\User List.csv'
+
+Import-csv $path | foreach-object {
+
+$Name=$_."FirstName"
+$LastName=$_."LastName"
+$JobPosition=$_."JobTitle"
+$Department=$_."Department"
+$DisplayName=$Name+" "+$LastName
+$UOU="OU=$Department,DC=g2,DC=local"
+$pass="Password05" 
+$Password= ConvertTo-SecureString  -String $pass -AsPlainText -Force
+
+#Write-Host  "User Added : $DisplayName"
+New-ADOrganizationalUnit -Name $Department -Path "DC=G2,DC=local"
+#Remove-ADUser -Identity $DisplayName -Confirm:$False
+#New-ADUser -Name $DisplayName -GivenName $Name -Surname $LastName -DisplayName $DisplayName -Enabled $True -AccountPassword $Password -Path $UOU -Title $JobPosition -Department $Department
+#Set-ADUser -Identity $Name -Department $Department 
+
+}
