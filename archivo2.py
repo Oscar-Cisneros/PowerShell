@@ -1,1 +1,0 @@
-print("Other thing2")
